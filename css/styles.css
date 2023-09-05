@@ -1,29 +1,32 @@
-.header {
+p {
+  margin: 0;
+}
+
+.flexbox {
   margin-left: auto;
   margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
 
   width: 400px;
+}
+
+.header {
+  padding: 10px 0;
+
   text-align: center;
   outline: 1px solid black;
 }
 
 .nav {
-  margin-left: auto;
-  margin-right: auto;
-
-  width: 400px;
   text-align: center;
-
   outline: 1px solid black;
 }
 
 .wrapper {
-  margin-left: auto;
-  margin-right: auto;
   display: flex;
   gap: 20px;
-
-  width: 400px;
 }
 
 .content {
@@ -48,20 +51,19 @@
   outline: 1px solid black;
 
   animation: rotateSquare 5s linear infinite;
-  transition: background-color 0.5s ease;
 }
 
 .sidebar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 20%;
   outline: 1px solid black;
 }
 
 .footer {
-  margin-left: auto;
-  margin-right: auto;
-
-  width: 400px;
   text-align: center;
-
   outline: 1px solid black;
 }
 
@@ -82,4 +84,38 @@
     transform: rotate(360deg);
     background-color: red;
   }
+}
+
+.grid {
+  margin-left: auto;
+  margin-right: auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: auto auto 1fr auto auto;
+  gap: 10px;
+
+  width: 400px;
+}
+
+.grid-header {
+  grid-column: 1 / span 2;
+}
+
+.grid-nav {
+  grid-column: 1 / span 2;
+}
+
+.grid-content {
+  grid-column: 1;
+  grid-row: 3;
+}
+
+.grid-sidebar {
+  grid-column: 2;
+  grid-row: 3;
+  margin-left: 15px;
+}
+
+.grid-footer {
+  grid-column: 1 / span 2;
 }
