@@ -1,0 +1,85 @@
+.header {
+  margin-left: auto;
+  margin-right: auto;
+
+  width: 400px;
+  text-align: center;
+  outline: 1px solid black;
+}
+
+.nav {
+  margin-left: auto;
+  margin-right: auto;
+
+  width: 400px;
+  text-align: center;
+
+  outline: 1px solid black;
+}
+
+.wrapper {
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  gap: 20px;
+
+  width: 400px;
+}
+
+.content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 2;
+
+  height: 200px;
+  outline: 1px solid black;
+}
+
+.square {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 90px;
+  height: 90px;
+
+  background-color: aqua;
+  outline: 1px solid black;
+
+  animation: rotateSquare 5s linear infinite;
+  transition: background-color 0.5s ease;
+}
+
+.sidebar {
+  outline: 1px solid black;
+}
+
+.footer {
+  margin-left: auto;
+  margin-right: auto;
+
+  width: 400px;
+  text-align: center;
+
+  outline: 1px solid black;
+}
+
+@keyframes rotateSquare {
+  0% {
+    transform: rotate(0deg);
+    background-color: red;
+  }
+  33% {
+    transform: rotate(120deg);
+    background-color: orange;
+  }
+  66% {
+    transform: rotate(240deg);
+    background-color: green;
+  }
+  100% {
+    transform: rotate(360deg);
+    background-color: red;
+  }
+}
