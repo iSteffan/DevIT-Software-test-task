@@ -2,14 +2,16 @@ p {
   margin: 0;
 }
 
-.flexbox {
+.container {
   margin-left: auto;
   margin-right: auto;
+  width: 400px;
+}
+
+.flexbox {
   display: flex;
   flex-direction: column;
   row-gap: 10px;
-
-  width: 400px;
 }
 
 .header {
@@ -35,11 +37,12 @@ p {
   align-items: center;
   flex-grow: 2;
 
-  height: 200px;
+  height: 150px;
   outline: 1px solid black;
 }
 
-.square {
+.square,
+.grid-square {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -90,32 +93,49 @@ p {
   margin-left: auto;
   margin-right: auto;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 1fr 20%; /* Змінено шаблон стовпців */
   grid-template-rows: auto auto 1fr auto auto;
-  gap: 10px;
-
+  row-gap: 10px;
+  column-gap: 20px;
   width: 400px;
 }
 
 .grid-header {
+  padding: 10px 0;
   grid-column: 1 / span 2;
+  text-align: center;
+  outline: 1px solid black;
 }
 
 .grid-nav {
   grid-column: 1 / span 2;
+  text-align: center;
+  outline: 1px solid black;
 }
 
 .grid-content {
   grid-column: 1;
   grid-row: 3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* flex-grow: 2; */
+  height: 150px;
+  outline: 1px solid black;
 }
 
 .grid-sidebar {
   grid-column: 2;
   grid-row: 3;
-  margin-left: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%; /* Змінено ширину на 100% */
+  outline: 1px solid black;
 }
 
 .grid-footer {
   grid-column: 1 / span 2;
+  text-align: center;
+  outline: 1px solid black;
 }
