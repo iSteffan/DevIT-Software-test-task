@@ -1,16 +1,15 @@
-// 1\. Напишите функцию deepEqual для проверки двух обьектов на идентичность. Пример:
+// 1\. Напишите функцию deepEqual для проверки двух обьектов на идентичность.
 
-function deepEqual(objA: any, objB: any): boolean {
-  // Перевірка на рівність об'єктів за посиланням
-  if (objA === objB) {
-    return true;
-  }
+function deepEqual(objA: object, objB: object): boolean {
+  const strA = JSON.stringify(objA);
+  const strB = JSON.stringify(objB);
+  return strA === strB;
 }
 
-// deepEqual({name: 'test'}, {name: 'test'}) // output true
-// deepEqual({name: 'test'}, {name: 'test1'}) // output false
-// deepEqual({name: 'test', data: {value: 1}}, {name: 'test', data: {value: 2}}) // output false
-// deepEqual({name: 'test'}, {name: 'test', age: 10}) // false
+// console.log(deepEqual({ name: 'test' }, { name: 'test' })); // output true
+// console.log(deepEqual({ name: 'test' }, { name: 'test1' })); // output false
+// console.log(deepEqual({ name: 'test', data: { value: 1 } }, { name: 'test', data: { value: 2 } })); // output false
+// console.log(deepEqual({ name: 'test' }, { name: 'test', age: 10 })); // false
 
 // 2\. Напишите функцию генератор chunkArray, которая возвращает итератор возвращающий части массива указанной длинны.
 
