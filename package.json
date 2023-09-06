@@ -1,0 +1,23 @@
+{
+  "name": "devit-software-test-task",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "tsc -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iSteffan/DevIT-Software-test-task.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/iSteffan/DevIT-Software-test-task/issues"
+  },
+  "homepage": "https://github.com/iSteffan/DevIT-Software-test-task#readme",
+  "devDependencies": {
+    "typescript": "^5.2.2"
+  }
+}
