@@ -13,11 +13,20 @@ function deepEqual(objA: object, objB: object): boolean {
 
 // 2\. Напишите функцию генератор chunkArray, которая возвращает итератор возвращающий части массива указанной длинны.
 
-// const iterator = chunkArray([1,2,3,4,5,6,7,8], 3);
-// iterator.next() // { value: [1,2,3], done: false }
-// iterator.next() // { value: [4,5,6], done: false }
-// iterator.next() // { value: [7,8], done: false }
-// iterator.next() // { value: undefined, done: true }
+function* chunkArray(arr: any[], chunkSize: number) {
+  let index = 0;
+
+  while (index < arr.length) {
+    yield arr.slice(index, (index += chunkSize));
+  }
+}
+
+const iterator: Iterator<any[], any, undefined> = chunkArray([1, 2, 3, 4, 5, 6, 7, 8], 3);
+
+//console.log(iterator.next()); // { value: [1, 2, 3], done: false }
+//console.log(iterator.next()); // { value: [4, 5, 6], done: false }
+//console.log(iterator.next()); // { value: [7, 8], done: false }
+//console.log(iterator.next()); // { value: undefined, done: true }
 
 // 3\. Напишите функцию обертку, которая на вход принимает массив функций и их параметров, а возвращает массив результатов их выполнения. Количество аргументов исполняемой функции **не ограничено**!
 
