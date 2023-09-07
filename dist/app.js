@@ -20,4 +20,16 @@ function bulkRun(functions, params) {
     }
     return results;
 }
+function arrayToObject(arr) {
+    const result = {};
+    for (const [key, value] of arr) {
+        if (Array.isArray(value)) {
+            result[key] = arrayToObject(value);
+        }
+        else {
+            result[key] = value;
+        }
+    }
+    return result;
+}
 //# sourceMappingURL=app.js.map

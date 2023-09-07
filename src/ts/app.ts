@@ -79,6 +79,22 @@ function bulkRun(functions: FunctionWithParams[], params: any[]): any[] {
 
 // 4\. Напишите метод arrayToObject, который превращает массив в объект (использовать рекурсию). Пример:
 
+function arrayToObject(arr: any[]): object {
+  const result: any = {};
+
+  // Проходимось по кожному елементі вхідного масиву,
+  // якщо значення це масив ? визиваємо arrayToObject : додаємо в об'єкт.
+  for (const [key, value] of arr) {
+    if (Array.isArray(value)) {
+      result[key] = arrayToObject(value);
+    } else {
+      result[key] = value;
+    }
+  }
+
+  return result;
+}
+
 // var arr = [['name', 'developer'], ['age', 5], ['skills', [['html',4], ['css', 5], ['js',5]]]];
 
 // arrayToObject(arr)
