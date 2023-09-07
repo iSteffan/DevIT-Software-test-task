@@ -15,6 +15,7 @@
 // 1\. Напишите функцию deepEqual для проверки двух обьектов на идентичность.
 
 function deepEqual(objA: object, objB: object): boolean {
+  // приводжу об'єкти до рядків і порівнюю їх
   const strA = JSON.stringify(objA);
   const strB = JSON.stringify(objB);
   return strA === strB;
@@ -28,9 +29,12 @@ function deepEqual(objA: object, objB: object): boolean {
 // 2\. Напишите функцию генератор chunkArray, которая возвращает итератор возвращающий части массива указанной длинны.
 
 function* chunkArray(arr: any[], chunkSize: number) {
+  //  змінна, яка служитиме для відстеження поточної позиції в масиві
   let index = 0;
 
   while (index < arr.length) {
+    // операція yield дозволяє повернути частину масиву arr в поточній ітерації циклу.
+    // виділення частини масиву від поточного index до index + chunkSize
     yield arr.slice(index, (index += chunkSize));
   }
 }
@@ -42,7 +46,23 @@ const iterator: Iterator<any[], any, undefined> = chunkArray([1, 2, 3, 4, 5, 6, 
 //console.log(iterator.next()); // { value: [7, 8], done: false }
 //console.log(iterator.next()); // { value: undefined, done: true }
 
-// 3\. Напишите функцию обертку, которая на вход принимает массив функций и их параметров, а возвращает массив результатов их выполнения. Количество аргументов исполняемой функции **не ограничено**!
+// 3\. Напишите функцию обертку, которая на вход принимает массив функций и их параметров, а возвращает массив результатов их выполнения.
+// Количество аргументов исполняемой функции ** не ограничено ** !
+
+type FunctionWithParams = (...args: any[]) => any;
+
+function bulkRun(functions: FunctionWithParams[], params: any[]): any[] {
+  const results: any[] = [];
+
+  for (let i = 0; i < functions.length; i++) {
+    const func = functions[i];
+    const paramArray = params[i];
+    const result = func(...paramArray);
+    results.push(result);
+  }
+
+  return results;
+}
 
 // const f1 = (cb) => {cb(1)}
 // const f2 = (a, cb) => {cb(a)}
