@@ -32,4 +32,19 @@ function arrayToObject(arr) {
     }
     return result;
 }
+function objectToArray(obj) {
+    const result = [];
+    for (const key in obj) {
+        if (obj.hasOwnProperty(key)) {
+            const value = obj[key];
+            if (typeof value === 'object' && value !== null) {
+                result.push([key, objectToArray(value)]);
+            }
+            else {
+                result.push([key, value]);
+            }
+        }
+    }
+    return result;
+}
 //# sourceMappingURL=app.js.map

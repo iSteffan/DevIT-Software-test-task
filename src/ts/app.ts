@@ -9,8 +9,8 @@
 
 // Опишите ваши дальнейшие действия что бы ваш код появился в ветке master в репозитории [git@example.com](mailto:git@example.com):example/test.git
 
-// Відповідь: клоную репозиторій собі локально на ноут, заходжу в гілку main - клоную сюди весь свій код - створюю коміт,
-// робпю пуш і все - мій код на гітхабі.
+// Відповідь: клоную репозиторій собі локально на ноут, заходжу в гілку main - копіюю сюди весь свій код - створюю коміт,
+// робпю пуш і все - мій код на гітхабі в гілці main.
 
 // 1\. Напишите функцию deepEqual для проверки двух обьектов на идентичность.
 
@@ -39,7 +39,7 @@ function* chunkArray(arr: any[], chunkSize: number) {
   }
 }
 
-const iterator: Iterator<any[], any, undefined> = chunkArray([1, 2, 3, 4, 5, 6, 7, 8], 3);
+const iterator: Iterator<any[], any> = chunkArray([1, 2, 3, 4, 5, 6, 7, 8], 3);
 
 //console.log(iterator.next()); // { value: [1, 2, 3], done: false }
 //console.log(iterator.next()); // { value: [4, 5, 6], done: false }
@@ -108,6 +108,33 @@ function arrayToObject(arr: any[]): object {
 // 	}
 
 // 5\. Написать обратный метод (см. задачу 4) objectToArray, который из объекта создаст массив. Пример:
+
+function objectToArray(obj: any): any[] {
+  const result: any[] = [];
+
+  // проходимось циклом по об'єкту
+  for (const key in obj) {
+    //перевіряємо чи належить об'єкту властивість key (виключаємо належність до прототипів)
+    if (obj.hasOwnProperty(key)) {
+      // записуємо властивість в змінну
+      const value = obj[key];
+      // перевіряємо чи це об'єкт - викликаємо рекурсію, якщо ні то відразу пушимо в result
+      // з прикладу: перше value - 'developer' - відразу пушимо в result
+      // аналогічно з age: 5,
+      // далі потрапляємо під перевірку об'єкта value = {html: 4, css: 5, js: 5} - потрапляємо в рекурсію
+      // на кожній ітерації в key та value по черзі потрапляють всі ключі та значення {html: 4, css: 5, js: 5}
+      // утворюється тимчасовий масив всередині рекурсії [['html', 4], ['css', 5], ['js', 5]]
+      // після закінчення рекурсії цей тимчасовий масив додається як [key, value] в основний result
+      if (typeof value === 'object' && value !== null) {
+        result.push([key, objectToArray(value)]);
+      } else {
+        result.push([key, value]);
+      }
+    }
+  }
+
+  return result;
+}
 
 // objectToArray({
 // 	name: 'developer',
