@@ -150,22 +150,41 @@ function objectToArray(obj: any): any[] {
 
 // 6\. Есть функция `primitiveMultiply`, которая умножает числа, но случайным образом может выбрасывать исключения типа: `NotificationException`, `ErrorException`. Задача написать функцию обертку которая будет повторять вычисление при исключении `NotificationException`, но прекращать работу при исключениях `ErrorException`
 
-// function NotificationException() {}
-// function ErrorException() {}
-// function primitiveMultiply(a, b) {
-//   const rand = Math.random();
-//   if (rand < 0.5) {
-//     return a * b;
-//   } else if(rand > 0.85) {
-//     throw new ErrorException()
-//   } else {
-//     throw new NotificationException()
-//   }
-// }
+class NotificationException extends Error {}
+class ErrorException extends Error {}
 
-// function reliableMultiply(a, b) {
-//   // Ваш код
-// }
+function primitiveMultiply(a: number, b: number): number {
+  const rand = Math.random();
+  if (rand < 0.5) {
+    return a * b;
+  } else if (rand > 0.85) {
+    throw new ErrorException();
+  } else {
+    throw new NotificationException();
+  }
+}
+
+function reliableMultiply(a: number, b: number): number {
+  // виконується завжди оскільки while true
+  while (true) {
+    // використовуємо блок try....catch для відловлення помилок
+    try {
+      return primitiveMultiply(a, b);
+    } catch (error) {
+      // якщо помилка належить до ErrorException з урахуванням наслідуваності - викидуємо помилку і перериваємо код
+      if (error instanceof ErrorException) {
+        throw error;
+      }
+      // якщо помилка належить до NotificationException з урахуванням наслідуваності - продовжуємо виконання коду
+      else if (error instanceof NotificationException) {
+        continue;
+      } else {
+        // якщо виникла інша помилка - показуємо її
+        throw error;
+      }
+    }
+  }
+}
 
 // console.log(reliableMultiply(8, 8));
 
