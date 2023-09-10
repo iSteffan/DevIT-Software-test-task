@@ -171,11 +171,11 @@ function reliableMultiply(a: number, b: number): number {
     try {
       return primitiveMultiply(a, b);
     } catch (error) {
-      // якщо помилка належить до ErrorException з урахуванням наслідуваності - викидуємо помилку і перериваємо код
+      // якщо помилка належить до ErrorException - викидуємо помилку і перериваємо код
       if (error instanceof ErrorException) {
         throw error;
       }
-      // якщо помилка належить до NotificationException з урахуванням наслідуваності - продовжуємо виконання коду
+      // якщо помилка належить до NotificationException - продовжуємо виконання коду
       else if (error instanceof NotificationException) {
         continue;
       } else {
@@ -190,17 +190,44 @@ function reliableMultiply(a: number, b: number): number {
 
 // 7\.  Напишите функцию, которая берет объект любой вложенности и преобразует ее в единую плоскую карту с разными уровнями, разделенными косой чертой ( `'/'`).
 
+function mapObject(obj: Record<string, any>): Record<string, any> {
+  //стек для ітерації по об'єкту
+  const stack: Array<[string, any]> = [['', obj]];
+  // результуючий об'єкт
+  const result: Record<string, any> = {};
+
+  // цикл працює до поки stack не стане пустим
+  while (stack.length) {
+    // витягуєм елемент з вершини стека, в префікс попадає на даній ітерації - '', в current об'єкт на даній ітерації циклу
+    const [prefix, current] = stack.pop() as [string, any];
+    console.log('prefix', prefix);
+    console.log('current', current);
+    // перевіряємо current
+    if (typeof current === 'object' && !Array.isArray(current) && current !== null) {
+      for (const key in current) {
+        // додаємо пару ключ-значення в стек для наступної обробки
+        stack.push([`${prefix}${key}/`, current[key]]);
+      }
+    } else {
+      // якщо значення не є об'єктом, додаєм його в результат
+      result[prefix.slice(0, -1)] = current;
+    }
+  }
+
+  return result;
+}
+
 // const obj = {
 //   a: {
 //     b: {
 //       c: 12,
-//       d: 'Hello World'
+//       d: 'Hello World',
 //     },
-//     e: [1,2,3]
-//   }
+//     e: [1, 2, 3],
+//   },
 // };
 
-// mapObject(demoData);
+// console.log(mapObject(obj));
 // // Outputs: {
 //   'a/b/c': 12,
 //   'a/b/d': 'Hello World',

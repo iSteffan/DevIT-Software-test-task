@@ -81,4 +81,22 @@ function reliableMultiply(a, b) {
         }
     }
 }
+function mapObject(obj) {
+    const stack = [['', obj]];
+    const result = {};
+    while (stack.length) {
+        const [prefix, current] = stack.pop();
+        console.log('prefix', prefix);
+        console.log('current', current);
+        if (typeof current === 'object' && !Array.isArray(current) && current !== null) {
+            for (const key in current) {
+                stack.push([`${prefix}${key}/`, current[key]]);
+            }
+        }
+        else {
+            result[prefix.slice(0, -1)] = current;
+        }
+    }
+    return result;
+}
 //# sourceMappingURL=app.js.map
