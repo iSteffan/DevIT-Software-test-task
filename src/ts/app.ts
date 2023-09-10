@@ -236,7 +236,35 @@ function mapObject(obj: Record<string, any>): Record<string, any> {
 
 // 8\. Напишите функцию `combos`, которая принимает положительное целое число `num` и возвращает массив массивов положительных целых чисел, где сумма каждого массива равна  `num`.  Массивы не должны повторяться.
 
-// combos(3);
+function combos(num: number): number[][] {
+  // результуючий масив
+  const result: number[][] = [];
+  // стек для можливих комбінацій де перший елемент - це поточна комбінація чисел,
+  // другий - початкове число, яким можна розпочати додавати числа до комбінації, і третій - залишок, який треба отримати
+  const stack: [number[], number, number][] = [[[], 1, num]];
+
+  // цикл триває, доки стек не стане порожнім. Цей цикл допоможе нам обходити всі можливі комбінації
+  while (stack.length > 0) {
+    // витягуємо зі стека поточну комбінацію currentCombo, початкове число start, і залишок remaining
+    const [currentCombo, start, remaining] = stack.pop()!;
+
+    // Ми перевіряємо, чи залишок remaining дорівнює 0. Якщо так, то це означає, що ми знайшли комбінацію чисел,
+    // сума яких дорівнює вхідному числу num, і додаємо цю комбінацію до результату
+    if (remaining === 0) {
+      result.push(currentCombo);
+    }
+    // інакше генеруємо нові комбінації, додаючи числа від start до remaining до поточної комбінації і додаємо їх до стека для подальшого обходу
+    else {
+      for (let i = start; i <= remaining; i++) {
+        stack.push([currentCombo.concat(i), i, remaining - i]);
+      }
+    }
+  }
+
+  return result;
+}
+
+// console.log(combos(3));
 // // Output:
 // [
 //   [ 3 ],
@@ -244,7 +272,7 @@ function mapObject(obj: Record<string, any>): Record<string, any> {
 //   [ 1, 2 ]
 // ]
 
-// combos(10);
+// console.log(combos(10));
 // // Output:
 // [
 //   [ 10 ],

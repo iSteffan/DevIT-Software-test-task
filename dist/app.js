@@ -99,4 +99,20 @@ function mapObject(obj) {
     }
     return result;
 }
+function combos(num) {
+    const result = [];
+    const stack = [[[], 1, num]];
+    while (stack.length > 0) {
+        const [currentCombo, start, remaining] = stack.pop();
+        if (remaining === 0) {
+            result.push(currentCombo);
+        }
+        else {
+            for (let i = start; i <= remaining; i++) {
+                stack.push([currentCombo.concat(i), i, remaining - i]);
+            }
+        }
+    }
+    return result;
+}
 //# sourceMappingURL=app.js.map
