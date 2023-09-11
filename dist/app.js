@@ -115,4 +115,15 @@ function combos(num) {
     }
     return result;
 }
+function add(num) {
+    let sum = num;
+    function innerAdd(num1) {
+        sum += num1;
+        return innerAdd;
+    }
+    innerAdd.valueOf = function () {
+        return sum;
+    };
+    return innerAdd;
+}
 //# sourceMappingURL=app.js.map
